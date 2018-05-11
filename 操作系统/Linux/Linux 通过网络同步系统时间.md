@@ -62,4 +62,4 @@ NTP Version3发布后，一直在不断地进行改进，NTP实现的一个重�
 
 ## 参考资料
 
-1. [ntp_百度百科](https://baike.baidu.com/item/NTP/1100433)
+- [1] ntp_百度百科 <https://baike.baidu.com/item/NTP/1100433>
