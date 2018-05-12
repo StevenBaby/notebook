@@ -48,9 +48,29 @@ TEMPLATES = [
 一个列表，列表中的元素是一个python点路径的字符串，用来从模板标签模块中添加 built-ins（内建）的标签。
 
 ```python
-OPTIONS={
-    'builtins': ['myapp.builtins'],
-}
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'hello.context_processors.hello',
+            ],
+            'builtins': [
+                'django.templatetags.i18n',
+                'django.templatetags.static',
+                'hello.builtins',
+            ],
+        },
+    },
+]
 ```
 
-内建的标签和过滤器可以在不调用{% load %} 标签的情况下调用。
+内建的标签和过滤器可以在不调用{% load %} 标签的情况下调用。如上所以，加入了 **django.templatetags.i18n** 和 **django.templatetags.static** 之后，就可以不用在模板中 load static 和 i18n 了。
+
+builtins 是一个 python 文件，其中有名为 **register = template.Library()** 的变量。
