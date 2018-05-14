@@ -23,3 +23,23 @@ DATABASES = {
 }
 ```
 其中 3600 是django对于MySQL连接的最长时间，之后就重新连接。默认情况下 MySQL 数据库的超时时间是 **28800**，小于这个值应该就可以。
+
+由于，django 连接超时的判断只会在请求发起是执行。所以如果程序的运行状态并不是web应用程序，而只是用到了django的ORM来处理数据，那么就需要手动判断连接是否有效，进而关闭不可用的连接，新建新的连接。具体的处理方法也很方便，示例如下：
+
+```python
+from functions import wraps
+from django.db import close_old_connections
+
+def check_connection(func):
+
+    @wraps(func)
+    def check(*args, **kwargs):
+        close_old_connections()
+        return func(*args, **kwargs)
+    return check
+
+```
+
+只需要调用 close_old_connections 函数就可以了，如果想要方便一点，可以定义如上装饰器，在用到数据库操作的地方检测一下就可以了。
+
+## django.db.utils.OperationalError: (2013, 'Lost connection to MySQL server during query')
