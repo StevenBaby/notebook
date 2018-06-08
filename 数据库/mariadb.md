@@ -1,5 +1,18 @@
 # mariadb 
 
+## ctrl + c 退出
+
+在配置文件中加入下面的内容：
+
+```conf
+[mysql]
+sigint-ignore
+```
+
+如果希望取消查询，可以输入 \c
+
+----
+
 ## ubuntu mariadb 无法登陆
 
 给新机器Ubuntu安装的Mariadb后无法登录，通过网上各种方法修改root用户密码，仍然无法解决，耗费几个小时！
