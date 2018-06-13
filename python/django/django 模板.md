@@ -74,3 +74,14 @@ TEMPLATES = [
 内建的标签和过滤器可以在不调用{% load %} 标签的情况下调用。如上所以，加入了 **django.templatetags.i18n** 和 **django.templatetags.static** 之后，就可以不用在模板中 load static 和 i18n 了。
 
 builtins 是一个 python 文件，其中有名为 **register = template.Library()** 的变量。
+
+
+## 内置标签
+
+### slice 
+
+返回列表分片，语法与Python分片相同
+
+```python
+{{ some_list|slice:":2" }}
+```
